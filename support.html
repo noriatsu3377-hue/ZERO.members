@@ -45,18 +45,18 @@
         <h2 class="support-section-title">お問い合わせ</h2>
         <p class="support-section-desc">コミュニティに関するご質問、ご相談はこちらからお問い合わせください。</p>
         
-        <form onsubmit="handleFormSubmit(event, 'contact')">
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSdVsMcFHVuwJODrhG5tgggVh6LdwTCh6NrykrIwFUINWfj6Iw/formResponse" method="POST" target="hidden_iframe" onsubmit="submittedContact=true; handleFormSubmit('contact')">
           <div class="minimal-form-group">
             <label>お名前 <span class="required">*</span></label>
-            <input type="text" class="minimal-input" placeholder="例: 山田 太郎" required>
+            <input type="text" name="entry.1389306728" class="minimal-input" placeholder="例: 山田 太郎" required>
           </div>
           <div class="minimal-form-group">
             <label>登録メールアドレス <span class="required">*</span></label>
-            <input type="email" class="minimal-input" placeholder="例: info@example.com" required>
+            <input type="email" name="entry.524191748" class="minimal-input" placeholder="例: info@example.com" required>
           </div>
           <div class="minimal-form-group">
             <label>お問い合わせ内容 <span class="required">*</span></label>
-            <textarea class="minimal-textarea" placeholder="ご質問やご相談内容を入力してください" required></textarea>
+            <textarea name="entry.741585262" class="minimal-textarea" placeholder="ご質問やご相談内容を入力してください" required></textarea>
           </div>
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px 0; font-size: 1.05rem;">お問い合わせを送信する</button>
         </form>
@@ -67,23 +67,23 @@
         <h2 class="support-section-title">領収書発行</h2>
         <p class="support-section-desc">領収書が必要な方はこちらから発行依頼をお願いいたします。</p>
         
-        <form onsubmit="handleFormSubmit(event, 'receipt')">
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLScvrMbPAR2jsujEuWVfgTE142Xc1HegLCZFyepNCZ8RuA5JOQ/formResponse" method="POST" target="hidden_iframe" onsubmit="submittedReceipt=true; handleFormSubmit('receipt')">
           <div class="minimal-form-group">
             <label>お名前 <span class="required">*</span></label>
-            <input type="text" class="minimal-input" required>
+            <input type="text" name="entry.2039492609" class="minimal-input" required>
           </div>
           <div class="minimal-form-group">
             <label>登録メールアドレス <span class="required">*</span></label>
-            <input type="email" class="minimal-input" required>
+            <input type="email" name="entry.2094909672" class="minimal-input" required>
           </div>
           <div class="minimal-form-group">
             <label>宛名 <span class="required">*</span></label>
-            <input type="text" class="minimal-input" placeholder="例: 株式会社○○" required>
+            <input type="text" name="entry.1976551024" class="minimal-input" placeholder="例: 株式会社○○" required>
           </div>
           <div class="minimal-form-group">
             <label>発行希望月 <span class="required">*</span></label>
             <!-- Date input with dark mode support -->
-            <input type="month" class="minimal-input" required style="color-scheme: dark;">
+            <input type="month" name="entry.57435955" class="minimal-input" required style="color-scheme: dark;">
           </div>
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px 0; font-size: 1.05rem;">領収書発行を依頼する</button>
         </form>
@@ -94,18 +94,18 @@
         <h2 class="support-section-title">退会申請</h2>
         <p class="support-section-desc">零 -ZERO- MEMBERSの退会をご希望の方はこちらからお手続きください。<br>申請内容を確認後、運営側で定期決済停止手続きを行います。</p>
         
-        <form onsubmit="handleFormSubmit(event, 'cancel')">
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSfZp73C6BFe6dV8E4dbEEosIMPIyzkpI64ZFnOso2R5r1dnJg/formResponse" method="POST" target="hidden_iframe" onsubmit="submittedCancel=true; handleFormSubmit('cancel')">
           <div class="minimal-form-group">
             <label>お名前 <span class="required">*</span></label>
-            <input type="text" class="minimal-input" required>
+            <input type="text" name="entry.533340162" class="minimal-input" required>
           </div>
           <div class="minimal-form-group">
             <label>登録メールアドレス <span class="required">*</span></label>
-            <input type="email" class="minimal-input" required>
+            <input type="email" name="entry.1608208854" class="minimal-input" required>
           </div>
           <div class="minimal-form-group">
             <label>退会理由 <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">(任意)</span></label>
-            <textarea class="minimal-textarea" style="min-height: 80px;" placeholder="差し支えなければ退会理由をお聞かせください"></textarea>
+            <textarea name="entry.1010269250" class="minimal-textarea" style="min-height: 80px;" placeholder="差し支えなければ退会理由をお聞かせください"></textarea>
           </div>
           
           <div style="margin-bottom: 40px; background: rgba(0,0,0,0.15); padding: 24px; border-radius: 8px; border: 1px solid var(--card-border);">
@@ -155,6 +155,9 @@
         <a href="index.html" class="btn btn-primary" style="margin-top: 20px; font-size: 0.9rem;">ホームへ戻る</a>
       </section>
 
+      <!-- Hidden Iframe to catch form submission -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submittedContact || submittedReceipt || submittedCancel) { showSuccess() }"></iframe>
+      
     </div>
   </main>
 
@@ -177,19 +180,32 @@
       });
     });
 
-    // Form Submission Simulation Logic
-    function handleFormSubmit(event, formType) {
-      event.preventDefault(); // Stop actual page reload
-      
+    // Form Submission Logic
+    var submittedContact = false;
+    var submittedReceipt = false;
+    var submittedCancel = false;
+    var currentFormType = '';
+
+    function handleFormSubmit(formType) {
+      currentFormType = formType;
+      // Let the form submit natively to the hidden iframe
+    }
+
+    function showSuccess() {
       // Hide all sections
       sections.forEach(sec => sec.classList.remove('active'));
       
       // Show corresponding success message section
-      const successId = 'success-' + formType;
+      const successId = 'success-' + currentFormType;
       document.getElementById(successId).classList.add('active');
       
       // Smooth scroll back to top of the content box
       document.querySelector('.support-wrapper').scrollIntoView({ behavior: 'smooth' });
+      
+      // Reset flags
+      submittedContact = false;
+      submittedReceipt = false;
+      submittedCancel = false;
     }
   </script>
 
