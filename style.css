@@ -1052,3 +1052,223 @@ img {
 .form-group textarea::placeholder {
   color: var(--text-muted);
 }
+
+/* --- Support Portal Layout --- */
+.support-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .support-wrapper {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.support-sidebar {
+  flex: 0 0 240px;
+}
+
+.support-sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px; /* for scrollbar */
+}
+
+@media (min-width: 768px) {
+  .support-sidebar-menu {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+}
+
+.support-menu-item {
+  display: block;
+  padding: 14px 20px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: var(--transition-fast);
+  white-space: nowrap;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.support-menu-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+}
+
+.support-menu-item.active {
+  background: var(--card-bg);
+  color: var(--gold-primary);
+  border: 1px solid var(--card-border);
+}
+
+.support-content {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 40px;
+  min-height: 400px;
+}
+
+@media (max-width: 768px) {
+  .support-content {
+    padding: 24px;
+  }
+}
+
+.support-section {
+  display: none;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.support-section.active {
+  display: block;
+}
+
+.support-section-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.support-section-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Minimalist Form UI */
+.minimal-form-group {
+  margin-bottom: 32px;
+}
+
+.minimal-form-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.minimal-form-group label .required {
+  color: #ff4d4f;
+  margin-left: 4px;
+}
+
+.minimal-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--card-border);
+  color: var(--text-primary);
+  font-size: 1.05rem;
+  padding: 8px 0;
+  transition: border-color 0.3s ease;
+}
+
+.minimal-input:focus {
+  outline: none;
+  border-bottom-color: var(--gold-primary);
+}
+
+.minimal-textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 16px;
+  resize: vertical;
+  min-height: 120px;
+  margin-top: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.minimal-textarea:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+}
+
+/* Custom Checkbox */
+.custom-checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.custom-checkbox-wrapper input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox {
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.2s ease;
+}
+
+.custom-checkbox-wrapper input[type="checkbox"]:checked + .custom-checkbox {
+  background: var(--gold-primary);
+  border-color: var(--gold-primary);
+}
+
+.custom-checkbox::after {
+  content: '';
+  width: 10px;
+  height: 5px;
+  border-left: 2px solid #08090b;
+  border-bottom: 2px solid #08090b;
+  transform: rotate(-45deg);
+  opacity: 0;
+  margin-bottom: 2px;
+}
+
+.custom-checkbox-wrapper input[type="checkbox"]:checked + .custom-checkbox::after {
+  opacity: 1;
+}
+
+.custom-checkbox-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.success-state {
+  text-align: center;
+  padding: 40px 0;
+}

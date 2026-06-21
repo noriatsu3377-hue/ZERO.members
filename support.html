@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アカウント・サポート | 零 -ZERO- MEMBERS</title>
+  <meta name="description" content="零 -ZERO- MEMBERS会員専用のサポートポータルです。各種お問い合わせ、領収書発行、退会申請が行えます。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="main-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo" id="logo-link">
+        <span>零 -ZERO-</span> <div class="logo-badge">MEMBERS</div>
+      </a>
+      <nav id="site-navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="index.html#featured-title-heading">講義一覧</a></li>
+        </ul>
+      </nav>
+      <a href="https://noriatsu3377-hue.github.io/ZERO-/" target="_blank" rel="noopener noreferrer" class="nav-cta" id="back-community-btn">コミュニティ概要</a>
+    </div>
+  </header>
+
+  <!-- Support Portal Main -->
+  <main class="support-wrapper">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="support-sidebar">
+      <ul class="support-sidebar-menu">
+        <li><button class="support-menu-item active" data-target="contact">お問い合わせ</button></li>
+        <li><button class="support-menu-item" data-target="receipt">領収書発行依頼</button></li>
+        <li><button class="support-menu-item" data-target="cancel">退会申請</button></li>
+      </ul>
+    </aside>
+
+    <!-- Content Area -->
+    <div class="support-content">
+      
+      <!-- 1. お問い合わせフォーム -->
+      <section id="contact" class="support-section active">
+        <h2 class="support-section-title">お問い合わせ</h2>
+        <p class="support-section-desc">コミュニティに関するご質問、ご相談はこちらからお問い合わせください。</p>
+        
+        <form onsubmit="handleFormSubmit(event, 'contact')">
+          <div class="minimal-form-group">
+            <label>お名前 <span class="required">*</span></label>
+            <input type="text" class="minimal-input" placeholder="例: 山田 太郎" required>
+          </div>
+          <div class="minimal-form-group">
+            <label>登録メールアドレス <span class="required">*</span></label>
+            <input type="email" class="minimal-input" placeholder="例: info@example.com" required>
+          </div>
+          <div class="minimal-form-group">
+            <label>お問い合わせ内容 <span class="required">*</span></label>
+            <textarea class="minimal-textarea" placeholder="ご質問やご相談内容を入力してください" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px 0; font-size: 1.05rem;">お問い合わせを送信する</button>
+        </form>
+      </section>
+
+      <!-- 2. 領収書発行フォーム -->
+      <section id="receipt" class="support-section">
+        <h2 class="support-section-title">領収書発行</h2>
+        <p class="support-section-desc">領収書が必要な方はこちらから発行依頼をお願いいたします。</p>
+        
+        <form onsubmit="handleFormSubmit(event, 'receipt')">
+          <div class="minimal-form-group">
+            <label>お名前 <span class="required">*</span></label>
+            <input type="text" class="minimal-input" required>
+          </div>
+          <div class="minimal-form-group">
+            <label>登録メールアドレス <span class="required">*</span></label>
+            <input type="email" class="minimal-input" required>
+          </div>
+          <div class="minimal-form-group">
+            <label>宛名 <span class="required">*</span></label>
+            <input type="text" class="minimal-input" placeholder="例: 株式会社○○" required>
+          </div>
+          <div class="minimal-form-group">
+            <label>発行希望月 <span class="required">*</span></label>
+            <!-- Date input with dark mode support -->
+            <input type="month" class="minimal-input" required style="color-scheme: dark;">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px 0; font-size: 1.05rem;">領収書発行を依頼する</button>
+        </form>
+      </section>
+
+      <!-- 3. 退会申請フォーム -->
+      <section id="cancel" class="support-section">
+        <h2 class="support-section-title">退会申請</h2>
+        <p class="support-section-desc">零 -ZERO- MEMBERSの退会をご希望の方はこちらからお手続きください。<br>申請内容を確認後、運営側で定期決済停止手続きを行います。</p>
+        
+        <form onsubmit="handleFormSubmit(event, 'cancel')">
+          <div class="minimal-form-group">
+            <label>お名前 <span class="required">*</span></label>
+            <input type="text" class="minimal-input" required>
+          </div>
+          <div class="minimal-form-group">
+            <label>登録メールアドレス <span class="required">*</span></label>
+            <input type="email" class="minimal-input" required>
+          </div>
+          <div class="minimal-form-group">
+            <label>退会理由 <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">(任意)</span></label>
+            <textarea class="minimal-textarea" style="min-height: 80px;" placeholder="差し支えなければ退会理由をお聞かせください"></textarea>
+          </div>
+          
+          <div style="margin-bottom: 40px; background: rgba(0,0,0,0.15); padding: 24px; border-radius: 8px; border: 1px solid var(--card-border);">
+            <label class="custom-checkbox-wrapper">
+              <input type="checkbox" required>
+              <div class="custom-checkbox"></div>
+              <span class="custom-checkbox-label">退会申請後は運営側で確認を行い、定期決済停止処理を実施することを理解しました</span>
+            </label>
+            <label class="custom-checkbox-wrapper" style="margin-bottom: 0;">
+              <input type="checkbox" required>
+              <div class="custom-checkbox"></div>
+              <span class="custom-checkbox-label">決済済み期間の日割り返金は行われないことを理解しました</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px 0; font-size: 1.05rem; background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary);">退会申請を送信する</button>
+        </form>
+      </section>
+
+      <!-- Success States (Hidden by default) -->
+      <section id="success-contact" class="support-section success-state">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--gold-primary)" style="margin-bottom: 16px;">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <h3 class="support-section-title">お問い合わせを受け付けました</h3>
+        <p class="support-section-desc">内容を確認次第、担当者よりご連絡いたします。</p>
+        <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 20px; font-size: 0.9rem;">別の申請をする</button>
+      </section>
+
+      <section id="success-receipt" class="support-section success-state">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--gold-primary)" style="margin-bottom: 16px;">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <h3 class="support-section-title">領収書発行依頼を受け付けました</h3>
+        <p class="support-section-desc">内容を確認後、ご登録メールアドレスへ領収書をお送りいたします。</p>
+        <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 20px; font-size: 0.9rem;">別の申請をする</button>
+      </section>
+
+      <section id="success-cancel" class="support-section success-state">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--gold-primary)" style="margin-bottom: 16px;">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <h3 class="support-section-title" style="margin-bottom: 24px;">退会申請を受け付けました</h3>
+        <p class="support-section-desc" style="margin-bottom: 16px; color: var(--text-primary);">この度は退会申請をいただきありがとうございます。</p>
+        <p class="support-section-desc" style="margin-bottom: 16px;">内容を確認後、運営側にて定期決済停止手続きを行います。<br>手続き完了後、ご登録メールアドレスへご連絡いたします。</p>
+        <p class="support-section-desc">今まで零 -ZERO- MEMBERSをご利用いただきありがとうございました。</p>
+        <a href="index.html" class="btn btn-primary" style="margin-top: 20px; font-size: 0.9rem;">ホームへ戻る</a>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // SPA Tab Navigation Logic
+    const menuItems = document.querySelectorAll('.support-menu-item');
+    const sections = document.querySelectorAll('.support-section');
+
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Remove active class from all tabs and sections
+        menuItems.forEach(btn => btn.classList.remove('active'));
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        // Add active class to clicked tab and corresponding section
+        item.classList.add('active');
+        const targetId = item.getAttribute('data-target');
+        const targetSection = document.getElementById(targetId);
+        targetSection.classList.add('active');
+      });
+    });
+
+    // Form Submission Simulation Logic
+    function handleFormSubmit(event, formType) {
+      event.preventDefault(); // Stop actual page reload
+      
+      // Hide all sections
+      sections.forEach(sec => sec.classList.remove('active'));
+      
+      // Show corresponding success message section
+      const successId = 'success-' + formType;
+      document.getElementById(successId).classList.add('active');
+      
+      // Smooth scroll back to top of the content box
+      document.querySelector('.support-wrapper').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span>零 -ZERO-</span> <div class="logo-badge">MEMBERS</div></a>
+        <p>足す前に戻る。身体本来の完成形を会員限定で深く探求する。</p>
+      </div>
+      <div>
+        <ul class="footer-links">
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="index.html#featured-title-heading">講義一覧</a></li>
+          <li><a href="https://noriatsu3377-hue.github.io/ZERO-/" target="_blank" rel="noopener noreferrer">コミュニティ概要</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container copyright">
+      &copy; 2026 零 -ZERO- MEMBERS All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
