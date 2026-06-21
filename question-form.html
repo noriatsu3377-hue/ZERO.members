@@ -37,8 +37,30 @@
       </div>
       
       <div class="form-iframe-wrapper">
-        <div class="form-iframe-inner" style="background: #12151a;">
-          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSffygp7qxn_h_oNw2RXQKBA35TDbQ37HCEPuUVgqeu8zuWT2w/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" style="filter: invert(90%) hue-rotate(180deg) brightness(85%) contrast(90%) sepia(20%); opacity: 0.95; mix-blend-mode: screen;">読み込んでいます…</iframe>
+        <div class="form-iframe-inner">
+          
+          <!-- Native Premium Form -->
+          <form action="https://docs.google.com/forms/d/e/1FAIpQLSffygp7qxn_h_oNw2RXQKBA35TDbQ37HCEPuUVgqeu8zuWT2w/formResponse" method="POST" target="hidden_iframe" class="custom-form" onsubmit="submitted=true;">
+            <div class="form-group">
+              <label for="consultation-content">相談内容 <span style="color: #ff4d4f;">*</span></label>
+              <textarea id="consultation-content" name="entry.447097305" rows="10" placeholder="こちらに質問や症例のご相談を入力してください" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 14px 0;">質問を送信する</button>
+          </form>
+
+          <!-- Success Message (Hidden by default) -->
+          <div id="success-message" style="display: none; text-align: center; padding: 60px 0;">
+            <svg viewBox="0 0 24 24" width="64" height="64" fill="var(--gold-primary)" style="margin-bottom: 20px;">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <h3 style="color: var(--gold-primary); font-size: 1.8rem; margin-bottom: 16px;">送信完了しました</h3>
+            <p style="color: var(--text-secondary); line-height: 1.8;">ご相談ありがとうございます。<br>回答は今後の講義コンテンツや症例検討会にて反映させていただきます。</p>
+          </div>
+
+          <!-- Hidden Iframe to catch the form submission -->
+          <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { document.querySelector('.custom-form').style.display='none'; document.getElementById('success-message').style.display='block'; window.scrollTo(0, 0); }"></iframe>
+          <script>var submitted = false;</script>
+
         </div>
       </div>
       
