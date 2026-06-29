@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>定例ZOOM・アーカイブ | 零 -ZERO- MEMBERS</title>
+  <meta name="description" content="零 -ZERO- MEMBERS会員限定のオンライン症例検討会（Zoom）参加リンク、今後の開催日程、および過去のアーカイブ動画閲覧ページです。">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .zoom-page-wrapper {
+      max-width: 900px;
+      margin: 60px auto 100px auto;
+      padding: 0 24px;
+    }
+
+    .zoom-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .zoom-badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-primary);
+      padding: 4px 16px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .zoom-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .zoom-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .zoom-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .zoom-card.highlight {
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: var(--gold-glow), 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .zoom-card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 16px;
+    }
+
+    .zoom-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .zoom-join-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--gold-gradient);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 18px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .zoom-join-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--gold-glow-intense);
+      color: #000;
+    }
+
+    .zoom-chat-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 14px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+
+    .zoom-chat-btn:hover {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.08);
+      color: var(--gold-primary);
+    }
+
+    .zoom-info-box {
+      background: rgba(8, 9, 11, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .info-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .info-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: var(--font-brand);
+      letter-spacing: 0.05em;
+    }
+
+    .schedule-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      transition: var(--transition-fast);
+    }
+
+    .schedule-item:last-child {
+      border-bottom: none;
+    }
+
+    .schedule-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .schedule-date {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .schedule-date::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+    }
+
+    .schedule-time {
+      font-size: 0.95rem;
+      color: var(--gold-primary);
+      font-weight: 600;
+      background: rgba(212, 175, 55, 0.1);
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+
+    .schedule-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: #000;
+      margin-bottom: 24px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .zoom-info-box {
+        grid-template-columns: 1fr;
+      }
+      .schedule-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .zoom-title {
+        font-size: 1.8rem;
+      }
+      .zoom-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="main-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo" id="logo-link">
+        <span>零 -ZERO-</span> <div class="logo-badge">MEMBERS</div>
+      </a>
+      <nav id="site-navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="index.html#featured-title-heading">講義一覧</a></li>
+        </ul>
+      </nav>
+      <a href="https://noriatsu3377-hue.github.io/ZERO-/" target="_blank" rel="noopener noreferrer" class="nav-cta" id="back-community-btn">コミュニティ概要</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="zoom-page-wrapper">
+    
+    <div class="zoom-header">
+      <span class="zoom-badge">Exclusive Member Event</span>
+      <h1 class="zoom-title">ZERO members 定例ZOOM</h1>
+      <p class="zoom-subtitle">月1回開催されるオンライン症例検討会・ディスカッション。臨床でのリアルな疑問を直接解消する会員限定イベントです。</p>
+    </div>
+
+    <!-- Zoom Link Card -->
+    <div class="zoom-card highlight">
+      <div class="zoom-card-title">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+        </svg>
+        参加リンク＆ミーティング情報
+      </div>
+
+      <div class="zoom-btn-group">
+        <a href="https://us06web.zoom.us/j/81142192466?pwd=zmW9wPgf0bidNahzfrok080Y32z8kr.1" target="_blank" rel="noopener noreferrer" class="zoom-join-btn">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+          </svg>
+          Zoom ミーティングに参加する
+        </a>
+        <a href="https://us06web.zoom.us/launch/jc/81142192466" target="_blank" rel="noopener noreferrer" class="zoom-chat-btn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+          </svg>
+          ミーティングチャットへのリンク
+        </a>
+      </div>
+
+      <div class="zoom-info-box">
+        <div>
+          <div class="info-label">ミーティングID</div>
+          <div class="info-value">811 4219 2466</div>
+        </div>
+        <div>
+          <div class="info-label">パスコード</div>
+          <div class="info-value">485330</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Future Schedule Card -->
+    <div class="zoom-card">
+      <div class="zoom-card-title">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+        </svg>
+        今後のZOOM日程 (2026年)
+      </div>
+      <p class="schedule-note">※都合により日程・時間が変更となる場合がございます。あらかじめご了承ください。</p>
+
+      <ul class="schedule-list">
+        <li class="schedule-item">
+          <span class="schedule-date">7月26日（日）</span>
+          <span class="schedule-time">21時〜23時</span>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-date">8月30日（日）</span>
+          <span class="schedule-time">21時〜23時</span>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-date">9月27日（日）</span>
+          <span class="schedule-time">21時〜23時</span>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-date">10月25日（日）</span>
+          <span class="schedule-time">21時〜23時</span>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-date">11月29日（日）</span>
+          <span class="schedule-time">21時〜23時</span>
+        </li>
+        <li class="schedule-item">
+          <span class="schedule-date">12月27日（日）</span>
+          <span class="schedule-time">21時〜23時</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Archive Video Card -->
+    <div class="zoom-card">
+      <div class="zoom-card-title">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+        </svg>
+        アーカイブ動画
+      </div>
+      <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">過去に開催された定例ZOOMの録画アーカイブをこちらからご視聴いただけます。</p>
+
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/UYLEpVyBhQE" title="ZERO members 定例ZOOM アーカイブ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <div style="text-align: right;">
+        <a href="https://youtu.be/UYLEpVyBhQE" target="_blank" rel="noopener noreferrer" class="read-more-btn" style="display: inline-flex; justify-content: flex-end;">
+          YouTubeで直接開く
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="index.html" class="btn btn-secondary">ホームへ戻る</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span>零 -ZERO-</span> <div class="logo-badge">MEMBERS</div></a>
+        <p>足す前に戻る。身体本来の完成形を会員限定で深く探求する。</p>
+      </div>
+      <div>
+        <ul class="footer-links">
+          <li><a href="index.html">ホーム</a></li>
+          <li><a href="index.html#featured-title-heading">講義一覧</a></li>
+          <li><a href="https://noriatsu3377-hue.github.io/ZERO-/" target="_blank" rel="noopener noreferrer">コミュニティ概要</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container copyright">
+      &copy; 2026 零 -ZERO- MEMBERS All Rights Reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
