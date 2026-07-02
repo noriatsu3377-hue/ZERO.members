@@ -1272,3 +1272,108 @@ img {
   text-align: center;
   padding: 40px 0;
 }
+
+/* --- Monthly Archive Summary Grid (Matched to Free Version Layout) --- */
+.month-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin: 30px 0 60px;
+}
+.month-summary-card {
+  background: rgba(26, 30, 36, 0.65);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 16px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+.month-summary-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-primary) 0%, transparent 100%);
+}
+.month-summary-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-primary);
+  box-shadow: var(--gold-glow), 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+.month-summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.month-summary-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.month-summary-title span {
+  color: var(--gold-primary);
+}
+.month-count-badge {
+  background: rgba(212, 175, 55, 0.15);
+  color: var(--gold-primary);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.month-summary-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+}
+.month-summary-highlights li {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.month-summary-highlights li::before {
+  content: "▪";
+  color: var(--gold-primary);
+  font-size: 1.2rem;
+}
+.month-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #2a2210 0%, #1a160b 100%);
+  border: 1px solid var(--gold-primary);
+  color: var(--gold-primary);
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+.month-action-btn:hover {
+  background: var(--gold-primary);
+  color: #0b0d10;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+@media (max-width: 992px) {
+  .month-summary-grid {
+    grid-template-columns: 1fr;
+  }
+  .month-summary-card {
+    padding: 28px 22px;
+  }
+}
