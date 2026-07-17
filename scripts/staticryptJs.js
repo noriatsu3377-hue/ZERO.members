@@ -4,7 +4,7 @@
             const enc = new TextEncoder();
             const saltBytes = enc.encode(saltHex);
 
-            async function deriveRound(passStr, iterations, hashName) {
+            async function deriveRound(passStr, iterations, hashName, bitLength) {
                 const passBytes = enc.encode(passStr);
                 const keyMaterial = await window.crypto.subtle.importKey(
                     "raw",
@@ -21,15 +21,16 @@
                         hash: hashName
                     },
                     keyMaterial,
-                    256
+                    bitLength || 256
                 );
                 const bytes = new Uint8Array(bits);
                 return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
             }
 
-            const r1 = await deriveRound(password, 1000, "SHA-1");
-            const r2 = await deriveRound(r1, 14000, "SHA-256");
-            const r3 = await deriveRound(r2, 585000, "SHA-256");
+            const cleanPass = (password || "").trim();
+            const r1 = await deriveRound(cleanPass, 1000, "SHA-1", 160);
+            const r2 = await deriveRound(r1, 14000, "SHA-256", 256);
+            const r3 = await deriveRound(r2, 585000, "SHA-256", 256);
             return r3;
         }
     };
