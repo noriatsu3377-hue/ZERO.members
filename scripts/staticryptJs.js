@@ -110,29 +110,7 @@
     function init(staticryptConfig, templateConfig) {
         const exports = {};
 
-        async function decryptAndReplaceHtml(hashedPassword) {
-            const { staticryptEncryptedMsgUniqueVariableName, staticryptSaltUniqueVariableName } = staticryptConfig;
-            const { replaceHtmlCallback } = templateConfig;
 
-            const result = await decode(
-                staticryptEncryptedMsgUniqueVariableName,
-                hashedPassword,
-                staticryptSaltUniqueVariableName
-            );
-            if (!result.success) {
-                return false;
-            }
-            const plainHTML = result.decoded;
-
-            if (typeof replaceHtmlCallback === "function") {
-                replaceHtmlCallback(plainHTML);
-            } else {
-                document.write(plainHTML);
-                document.close();
-            }
-
-            return true;
-        }
 
         async function handleDecryptionOfPage(password, isRememberChecked) {
             const { staticryptSaltUniqueVariableName } = staticryptConfig;
@@ -142,12 +120,16 @@
         exports.handleDecryptionOfPage = handleDecryptionOfPage;
 
         async function handleDecryptionOfPageFromHash(hashedPassword, isRememberChecked) {
-            const { isRememberEnabled, rememberDurationInDays } = staticryptConfig;
-            const { rememberExpirationKey, rememberPassphraseKey } = templateConfig;
+            const { staticryptEncryptedMsgUniqueVariableName, staticryptSaltUniqueVariableName, isRememberEnabled, rememberDurationInDays } = staticryptConfig;
+            const { replaceHtmlCallback, rememberExpirationKey, rememberPassphraseKey } = templateConfig;
 
-            const isDecryptionSuccessful = await decryptAndReplaceHtml(hashedPassword);
+            const result = await decode(
+                staticryptEncryptedMsgUniqueVariableName,
+                hashedPassword,
+                staticryptSaltUniqueVariableName
+            );
 
-            if (!isDecryptionSuccessful) {
+            if (!result.success) {
                 return {
                     isSuccessful: false,
                     hashedPassword,
@@ -162,6 +144,15 @@
                         (new Date().getTime() + rememberDurationInDays * 24 * 60 * 60 * 1000).toString()
                     );
                 }
+            }
+
+            const plainHTML = result.decoded;
+
+            if (typeof replaceHtmlCallback === "function") {
+                replaceHtmlCallback(plainHTML);
+            } else {
+                document.write(plainHTML);
+                document.close();
             }
 
             return {
@@ -229,8 +220,8 @@
             const hashedPassword = localStorage.getItem(rememberPassphraseKey);
 
             if (hashedPassword) {
-                const isDecryptionSuccessful = await decryptAndReplaceHtml(hashedPassword);
-                if (!isDecryptionSuccessful) {
+                const result = await handleDecryptionOfPageFromHash(hashedPassword, true);
+                if (!result.isSuccessful) {
                     clearLocalStorage();
                     return false;
                 }
