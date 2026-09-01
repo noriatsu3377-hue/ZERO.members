@@ -1,16 +1,15 @@
 #!/bin/bash
 
 # 生成したサムネイル画像をアセットフォルダにコピーします
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_menstrual_1787672585082.png assets/thumb_menstrual.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_pelvic_floor_1787672598886.png assets/thumb_pelvic_floor.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_ankle_cai_1787672613853.png assets/thumb_ankle_cai.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_tmj_1787672628947.png assets/thumb_tmj.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_manual_context_1787672641783.png assets/thumb_manual_context.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_fascia_lines_1787672669927.png assets/thumb_fascia_lines.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_stretching_1787672685260.png assets/thumb_stretching.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_internal_cold_1787672700217.png assets/thumb_internal_cold.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_bronchiectasis_1787672712986.png assets/thumb_bronchiectasis.png
-cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/thumb_bloating_1787672726004.png assets/thumb_bloating.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_pregnancy_1788285294576.png assets/thumb_pregnancy.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_older_adults_1788285305462.png assets/thumb_older_adults.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_headache_1788285316998.png assets/thumb_headache.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_sleep_apnea_1788285326821.png assets/thumb_sleep_apnea.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_tendinopathy_1788285337412.png assets/thumb_tendinopathy.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_hip_groin_1788285350074.png assets/thumb_hip_groin.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_pfp_1788285363565.png assets/thumb_pfp.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_shoulder_rcrsp_1788285373082.png assets/thumb_shoulder_rcrsp.png
+cp /Users/user/.gemini/antigravity/brain/8fb281e5-1861-4054-b9e4-a0b5796950e4/thumb_neck_pain_1788285383250.png assets/thumb_neck_pain.png
 
 # HTMLファイル（記事一覧など）に追加された可能性がある変更もすべてステージングします
 git add *.html
@@ -20,5 +19,5 @@ git add *.html
 
 # アセットや暗号化されたHTMLなどのすべての変更をステージングしてコミット・プッシュします
 git add -A
-git commit -m "10件の新規有料記事用サムネイル画像を追加・暗号化更新"
+git commit -m "9件の新規有料記事用サムネイル画像を追加・暗号化更新"
 git push
