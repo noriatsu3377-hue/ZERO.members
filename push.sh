@@ -16,7 +16,7 @@ cp /Users/user/.gemini/antigravity/brain/432420d3-3277-48c3-9317-f73951c9bd82/th
 git add *.html
 
 # 暗号化スクリプトを実行します（合言葉が必要でした）
-./encrypt.sh "ZERO_AUGUST_2026"
+./encrypt.sh "ZERONEXT9"
 
 # アセットや暗号化されたHTMLなどのすべての変更をステージングしてコミット・プッシュします
 git add -A
