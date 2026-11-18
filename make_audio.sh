@@ -1,16 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # 零 -ZERO- MEMBERS 講義の音声ファイル（暗号化済み）を作るスクリプト（macOS専用）
-# ------------------------------------------------------------------------------
-# 使い方（このフォルダで実行）:
-#   ./make_audio.sh                 … 全講義（作成済みで本文が変わっていないものは飛ばす）
-#   ./make_audio.sh article-falls   … 名前に「article-falls」を含む講義だけ
-#
-# しくみ:
-#   1) private_html/_audio_text/*.txt（読み上げ原稿・非公開）を macOS の say で音声化
-#   2) afconvert で圧縮（m4a / HE-AAC モノラル）
-#   3) private_html/_audio_key.txt の鍵で AES-256-CBC 暗号化し audio/*.bin に出力
-#      → 公開されるのは暗号化されたファイルだけ。鍵は暗号化された記事ページの中にのみ存在。
 # ==============================================================================
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -27,7 +17,6 @@ BITRATE="${BITRATE:-24000}"
 KEY="$(tr -d ' \n' < "$KEY_FILE")"
 [ ${#KEY} -eq 64 ] || { echo "[ERROR] 鍵の形式が不正です"; exit 1; }
 
-# 日本語の声を選ぶ（Kyoko 拡張 → Kyoko → Otoya → 最初の日本語音声）
 VOICE="${VOICE:-}"
 if [ -z "$VOICE" ]; then
   LIST="$(say -v '?' | grep -E 'ja[_-]JP' || true)"
@@ -36,7 +25,7 @@ if [ -z "$VOICE" ]; then
   done
   [ -n "$VOICE" ] || VOICE="$(printf '%s\n' "$LIST" | head -1 | sed -E 's/ +ja[_-]JP.*//')"
 fi
-[ -n "$VOICE" ] || { echo "[ERROR] 日本語の音声が見つかりません。システム設定 > アクセシビリティ > 読み上げコンテンツ で日本語の声を追加してください"; exit 1; }
+[ -n "$VOICE" ] || { echo "[ERROR] 日本語の音声が見つかりません。"; exit 1; }
 echo "[INFO] 声: $VOICE / ビットレート: $BITRATE"
 
 mkdir -p "$OUT_DIR" "$DONE_DIR"
@@ -57,6 +46,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import time
 import wave
 
 try:
@@ -65,10 +55,9 @@ try:
     chunks = []
     chunk = ""
     for sentence in re.findall(r"[^。！？\n]*[。！？\n]|[^。！？\n]+$", text):
-        # Only split within a sentence if it alone exceeds the size limit.
-        for start in range(0, len(sentence), 8000):
-            part = sentence[start:start + 8000]
-            if len(chunk) + len(part) > 8000:
+        for start in range(0, len(sentence), 2500):
+            part = sentence[start:start + 2500]
+            if len(chunk) + len(part) > 2500:
                 chunks.append(chunk)
                 chunk = ""
             chunk += part
@@ -77,7 +66,6 @@ try:
     if not chunks:
         raise ValueError("Empty input")
 
-    # Keep the existing afconvert input path; its contents are now WAV.
     with tempfile.TemporaryDirectory(dir=tmp) as work:
         with wave.open(str(pathlib.Path(tmp) / "a.aiff"), "wb") as output:
             expected = None
@@ -85,12 +73,24 @@ try:
                 txt_path = pathlib.Path(work) / "chunk.txt"
                 wav_path = pathlib.Path(work) / "chunk.wav"
                 txt_path.write_text(chunk, encoding="utf-8")
-                subprocess.run(
-                    ["say", "-v", voice, "-f", str(txt_path),
-                     "--file-format=WAVE", "--data-format=LEI16@22050",
-                     "-o", str(wav_path)],
-                    check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-                )
+                ok = False
+                for attempt in range(4):
+                    use_voice = voice if attempt < 2 else "Kyoko"
+                    try:
+                        subprocess.run(
+                            ["say", "-v", use_voice, "-f", str(txt_path),
+                             "--file-format=WAVE", "--data-format=LEI16@22050",
+                             "-o", str(wav_path)],
+                            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                            timeout=30
+                        )
+                        if wav_path.exists() and wav_path.stat().st_size > 100:
+                            ok = True
+                            break
+                    except Exception:
+                        time.sleep(0.5)
+                if not ok:
+                    raise RuntimeError("say failed after retries")
                 with wave.open(str(wav_path), "rb") as audio:
                     params = (audio.getnchannels(), audio.getsampwidth(),
                               audio.getframerate(), audio.getcomptype(),
@@ -107,7 +107,6 @@ try:
                         output.writeframesraw(frames)
                 wav_path.unlink()
 except Exception:
-    # Do not expose private text or subprocess arguments in error output.
     sys.exit(1)
 PY_AUDIO
   then echo "  [NG] say 失敗"; failed=$((failed+1)); continue; fi
