@@ -17,10 +17,10 @@ BITRATE="${BITRATE:-24000}"
 KEY="$(tr -d ' \n' < "$KEY_FILE")"
 [ ${#KEY} -eq 64 ] || { echo "[ERROR] 鍵の形式が不正です"; exit 1; }
 
-VOICE="${VOICE:-}"
+VOICE="${VOICE:-Kyoko}"
 if [ -z "$VOICE" ]; then
   LIST="$(say -v '?' | grep -E 'ja[_-]JP' || true)"
-  for v in "Kyoko (Enhanced)" "Kyoko（拡張）" "Kyoko" "Otoya (Enhanced)" "Otoya"; do
+  for v in "Kyoko" "Otoya"; do
     if printf '%s\n' "$LIST" | grep -q "^$v "; then VOICE="$v"; break; fi
   done
   [ -n "$VOICE" ] || VOICE="$(printf '%s\n' "$LIST" | head -1 | sed -E 's/ +ja[_-]JP.*//')"
