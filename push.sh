@@ -6,7 +6,7 @@
 git add *.html
 
 # 暗号化スクリプトを実行します（合言葉が必要でした）
-./encrypt.sh "ZERONEXT9"
+./encrypt.sh "ZERONEXT11"
 
 # アセットや暗号化されたHTMLなどのすべての変更をステージングしてコミット・プッシュします
 git add -A
